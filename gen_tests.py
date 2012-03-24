@@ -55,6 +55,9 @@ def create_test_stubs(skeleton, test_dir):
     if not os.path.exists(test_dir):
         os.makedirs(test_dir)
     header = """#!/usr/bin/env python
+'''
+Tests generated with gen_tests.py https://github.com/drsm79/gen_tests
+'''
 import unittest
 from %s import *
 """
@@ -81,7 +84,7 @@ class %sTest(unittest.TestCase):
     for module in skeleton:
         for k, v in module.items():
             f = open("%s/%s_t.py" % (test_dir, k),"w")
-            f.write(header % module)
+            f.write(header % k)
             for c in v['classes']:
                 for cl, methods in c.items():
                     f.write(class_template % cl)
